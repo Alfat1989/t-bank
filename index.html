@@ -5,19 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <script src="https://sso-forms-prod.cdn-tinkoff.ru/tinkoff-id/widget.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-    <div id="widget-container">
-        <button class="auth-button" id="auth-button">Войти с
-            <img src="./image/t-bank.svg" class="image" alt="Icon">
-        </button>
-    </div>
+    <div id="container-for-tid-button"></div>
     <a href="./index2.html">go</a>
 
+    <script>
 
-    <script src="./index.js"></script>
+        function generateState() {
+            return Math.random().toString(36).substring(2); // Простая генерация случайного state
+        }
+        const authParams = {
+            redirectUri: './welcome.html',
+            responseType: 'code',
+            clientId: 'tid_ligafootball',
+            state: generateState()
+        };
+
+        const uiParams = {
+            container: '#container-for-tid-button',
+            size: 'm',
+            color: 'primary',
+            text: 'Т-Банк',
+            target: '_self'
+        };
+
+        const tidSdk = new TidSDK(authParams);
+        tidSdk.addButton(uiParams);
+    </script>
+
 
 </body>
 

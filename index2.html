@@ -16,6 +16,8 @@
             const state = urlParams.get('state');
             const savedState = sessionStorage.getItem('auth_state');
 
+            console.log('urlParams', urlParams);
+
             if (state !== savedState) {
                 document.getElementById('status').innerText = 'Ошибка: Неверный параметр state.';
                 return;
