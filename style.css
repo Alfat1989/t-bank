@@ -1,0 +1,25 @@
+.auth-button {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    border-radius: 50px;
+    border: none;
+    background-color: #FFDD2D;
+    cursor: pointer;
+}
+
+
+.auth-button:active {
+    background-color: #FCC521;
+}
+
+.auth-button:hover {
+    background-color: #FAB619;
+}
+
+.image {
+    margin-left: 5px;
+    width: 30px;
+    height: auto;
+}

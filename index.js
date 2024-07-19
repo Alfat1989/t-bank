@@ -1,0 +1,31 @@
+const authButton = document.querySelector('#auth-button')
+const clientId = 'tid_ligafootball'
+const clientSecret = 'sNo4lTQ7MiZxsb9Ys9cxzklm0G2Wkr'
+const redirectUri = './index2.html'
+
+authButton.addEventListener('click', authFn)
+
+function authFn() {
+    const state = generateState();
+    const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
+    const authWindow = window.open(authUrl, 'authWindow', 'width=800,height=600');
+    const checkAuthWindowClosed = setInterval(function () {
+        if (authWindow.closed) {
+            clearInterval(checkAuthWindowClosed);
+            // Обработка получения кода из redirectUri
+            const urlParams = new URLSearchParams(window.location.search);
+            const authCode = urlParams.get('code');
+
+            if (authCode) {
+                // Замените URL на нужный вам URL для обработки успешной авторизации
+                window.location.href = `./welcome.html?code=${authCode}`;
+            } else {
+                alert('Ошибка авторизации');
+            }
+        }
+    }, 1000);
+}
+
+function generateState() {
+    return Math.random().toString(36).substring(2); // Простая генерация случайного state
+}

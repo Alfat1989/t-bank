@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация завершена</title>
+</head>
+
+<body>
+    <div id="status"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+            const savedState = sessionStorage.getItem('auth_state');
+
+            if (state !== savedState) {
+                document.getElementById('status').innerText = 'Ошибка: Неверный параметр state.';
+                return;
+            }
+
+            if (code) {
+                // Здесь можно отправить код на сервер для обмена на токен доступа
+                document.getElementById('status').innerText = 'Авторизация успешна. Код: ' + code;
+                // Перенаправление на другую страницу
+                window.location.href = './welcome.html'; // Замените на URL вашей страницы успеха
+            } else {
+                document.getElementById('status').innerText = 'Ошибка авторизации.';
+            }
+        });
+    </script>
+</body>
+
+</html>
