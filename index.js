@@ -1,9 +1,9 @@
 const authButton = document.querySelector('#auth-button')
-const clientId = 'tid_ligafootball2'
+const clientId = 'tid_ligafootball'
 const clientSecret = 'sNo4lTQ7MiZxsb9Ys9cxzklm0G2Wkr'
 const redirectUrl = window.location.origin + './index2.html'
 
-authButton.addEventListener('click', authFn2)
+authButton.addEventListener('click', authFn)
 
 function authFn() {
     const state = generateState();
@@ -17,43 +17,19 @@ function authFn() {
             const authCode = urlParams.get('code');
 
             if (authCode) {
-
                 window.location.href = `./welcome.html?code=${authCode}`;
             } else {
                 alert('Ошибка авторизации');
             }
 
-            console.log(authCode);
+            console.log('authCode', authCode);
+            console.log('urlParams', urlParams);
         }
     }, 1000);
 }
 
-function authFn2() {
-    const state = generateState();
-    sessionStorage.setItem('auth_state', state); // Сохраняем state в sessionStorage для проверки после редиректа
-
-    const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUrl}&state=${state}`;
-    window.location.href = authUrl;
-}
 
 function generateState() {
     return Math.random().toString(36).substring(2);
 }
 
-const authParams = {
-    redirectUri: './welcome.html',
-    responseType: 'code',
-    clientId: 'tid_ligafootball2',
-    state: generateState()
-};
-
-const uiParams = {
-    container: '#container-for-tid-button',
-    size: 'm',
-    color: 'primary',
-    text: 'Т-Банк',
-    target: '_self'
-};
-
-const tidSdk = new TidSDK(authParams);
-tidSdk.addButton(uiParams);
