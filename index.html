@@ -11,13 +11,15 @@
 
 <body>
     <div id="container-for-tid-button"></div>
-    <!-- <a href="./index2.html">go</a> -->
+
+    <button id="auth-button">Веб авторизация</button>
 
     <script>
 
         function generateState() {
             return Math.random().toString(36).substring(2); // Простая генерация случайного state
         }
+
         const authParams = {
             redirectUri: './welcome.html',
             responseType: 'code',
@@ -35,7 +37,10 @@
 
         const tidSdk = new TidSDK(authParams);
         tidSdk.addButton(uiParams);
+
     </script>
+
+    <script src="./index.js"></script>
 
 
 </body>
