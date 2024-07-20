@@ -3,11 +3,11 @@ const clientId = 'tid_ligafootball'
 const clientSecret = 'sNo4lTQ7MiZxsb9Ys9cxzklm0G2Wkr'
 const redirectUri = 'https://t-league.tilda.ws/auth-tinkoff/callback/'
 
-authButton.addEventListener('click', authFn)
+authButton.addEventListener('click', authFn2)
 
 function authFn() {
     const state = generateState();
-    const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUrl}&state=${state}`;
+    const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
     const authWindow = window.open(authUrl, 'authWindow', 'width=800,height=600');
     const checkAuthWindowClosed = setInterval(function () {
         if (authWindow.closed) {
@@ -38,4 +38,6 @@ function authFn2() {
 function generateState() {
     return Math.random().toString(36).substring(2);
 }
+
+
 
