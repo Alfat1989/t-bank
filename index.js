@@ -1,13 +1,13 @@
 const authButton = document.querySelector('#auth-button')
 const clientId = 'tid_ligafootball'
 const clientSecret = 'sNo4lTQ7MiZxsb9Ys9cxzklm0G2Wkr'
-const redirectUrl = window.location.origin + './index2.html'
+const redirectUri = window.location.origin + '/index2.html'
 
-authButton.addEventListener('click', authFn)
+authButton.addEventListener('click', authFn2)
 
 function authFn() {
     const state = generateState();
-    const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUrl}&state=${state}`;
+    const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
     const authWindow = window.open(authUrl, 'authWindow', 'width=800,height=600');
     const checkAuthWindowClosed = setInterval(function () {
         if (authWindow.closed) {
@@ -28,8 +28,18 @@ function authFn() {
     }, 1000);
 }
 
+function authFn2() {
+    const state = generateState();
+    sessionStorage.setItem('auth_state', state); // Сохраняем state в sessionStorage для проверки после редиректа
+
+    const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
+    window.location.href = authUrl;
+}
+
 
 function generateState() {
     return Math.random().toString(36).substring(2);
 }
+
+
 
