@@ -16,8 +16,6 @@
             const state = urlParams.get('state');
             const savedState = sessionStorage.getItem('auth_state');
 
-            console.log('urlParams', urlParams);
-
             if (state !== savedState) {
                 document.getElementById('status').innerText = 'Ошибка: Неверный параметр state.';
                 return;
@@ -27,7 +25,6 @@
                 // Здесь можно отправить код на сервер для обмена на токен доступа
                 document.getElementById('status').innerText = 'Авторизация успешна. Код: ' + code;
                 // Перенаправление на другую страницу
-                window.location.href = './welcome.html'; // Замените на URL вашей страницы успеха
             } else {
                 document.getElementById('status').innerText = 'Ошибка авторизации.';
             }

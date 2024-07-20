@@ -1,7 +1,7 @@
 const authButton = document.querySelector('#auth-button')
 const clientId = 'tid_ligafootball'
 const clientSecret = 'sNo4lTQ7MiZxsb9Ys9cxzklm0G2Wkr'
-const redirectUri = window.location.origin + '/index2.html'
+const redirectUri = 'https://t-league.tilda.ws/auth-tinkoff/callback/'
 
 authButton.addEventListener('click', authFn2)
 
@@ -21,9 +21,6 @@ function authFn() {
             } else {
                 alert('Ошибка авторизации');
             }
-
-            console.log('authCode', authCode);
-            console.log('urlParams', urlParams);
         }
     }, 1000);
 }
@@ -34,6 +31,7 @@ function authFn2() {
 
     const authUrl = `https://id.tbank.ru/auth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
     window.location.href = authUrl;
+
 }
 
 
