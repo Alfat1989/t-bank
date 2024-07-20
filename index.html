@@ -12,8 +12,6 @@
 <body>
     <div id="container-for-tid-button"></div>
 
-    <button id="auth-button">Веб авторизация</button>
-
     <script>
 
         function generateState() {
@@ -21,7 +19,7 @@
         }
 
         const authParams = {
-            redirectUri: './welcome.html',
+            redirectUri: 'https://t-league.tilda.ws/auth-tinkoff/callback/',
             responseType: 'code',
             clientId: 'tid_ligafootball',
             state: generateState()
@@ -31,16 +29,15 @@
             container: '#container-for-tid-button',
             size: 'm',
             color: 'primary',
-            text: 'Т-Банк',
-            target: '_self'
+            text: 'Войти с',
+            target: '_self',
+            recognized: true
         };
 
         const tidSdk = new TidSDK(authParams);
         tidSdk.addButton(uiParams);
 
     </script>
-
-    <script src="./index.js"></script>
 
 
 </body>
